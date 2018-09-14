@@ -2,8 +2,8 @@ import struct, os
 import numpy as np
 
 class CNNMnist:
-    def __init__(self, wkdir=None):
-        self.wkdir = wkdir
+    def __init__(self):
+        self.data_dir = None
         self.is_preprocessed = False
         self.x_train = None
         self.y_train = None
@@ -13,12 +13,14 @@ class CNNMnist:
         self.model = None
         self.history = None
 
-    def load_dataset(self):
+    def load_dataset(self, data_dir):
         # load data
-        fname_img_train = os.path.join(self.wkdir, 'train-images-idx3-ubyte')
-        fname_lbl_train = os.path.join(self.wkdir, 'train-labels-idx1-ubyte')
-        fname_img_test = os.path.join(self.wkdir, 't10k-images-idx3-ubyte')
-        fname_lbl_test = os.path.join(self.wkdir, 't10k-labels-idx1-ubyte')
+        self.data_dir = data_dir
+
+        fname_img_train = os.path.join(self.data_dir, 'train-images-idx3-ubyte')
+        fname_lbl_train = os.path.join(self.data_dir, 'train-labels-idx1-ubyte')
+        fname_img_test = os.path.join(self.data_dir, 't10k-images-idx3-ubyte')
+        fname_lbl_test = os.path.join(self.data_dir, 't10k-labels-idx1-ubyte')
 
         with open(fname_lbl_train, 'rb') as flbl:
             magic, num = struct.unpack(">II", flbl.read(8))
@@ -98,7 +100,7 @@ class CNNMnist:
             train_callbacks = [
                 callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1,),
                 callbacks.ModelCheckpoint(filepath=model_path, monitor='val_loss', verbose=0,),
-                callbacks.EarlyStopping(monitor='val_loss', patience=2, verbose=0, mode='auto')
+                callbacks.EarlyStopping(monitor='val_loss', patience=4, verbose=0, mode='auto')
             ]
         else:
             train_callbacks = None
