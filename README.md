@@ -9,7 +9,7 @@ CNNMnist is a mini-project to apply convolutional neural network to [MNIST](http
 
 - Model training pipeline can be started by
   `task_01_cnn_mnist_pipeline.py -i <input_dataset_dir>`
-- Classify the digit on an input image can done by
+- Recognize the digit on an input image can done by
   `task_02_cnn_mnist_predict.py -i <input_image> -m <trained_model>`
 
 Demonstration of the steps above can be found in *demo_task_01_cnn_mnist_pipeline.ipynb* and *demo_task_02_cnn_mnist_predict.ipynb.* Details about the model setup, modules of pipeline steps can be found in class [CNNMnist](https://github.com/chlin907/CNNMnist/tree/master/CNNMnist).
@@ -20,7 +20,7 @@ Based on training history, we can conclude the model from epoch 5 is good for th
 
 ![demo_1](./doc/demo_1.png)
 
-Out best model perform quite consistently across training, validation and test sets without overfitting. 
+Out best model performs quite consistently across training, validation and test sets without overfitting. 
 
 | Dataset                  | Loss   | Accuracy |
 | ------------------------ | ------ | -------- |
